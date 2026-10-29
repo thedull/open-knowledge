@@ -1559,6 +1559,9 @@ msgstr "Dotyczy wszystkich projektów na tym komputerze, w czatach Claude Code i
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "Dotyczy wszystkich projektów na tym komputerze. Claude i Codex uruchomione z wbudowanego terminala oraz każdy agent w czacie panelu Agentów w aplikacji automatycznie zatwierdzają narzędzia odczytu i zapisu OpenKnowledge (Claude uruchamia też automatycznie \"{cliCommand} open\"). Usuwanie, przenoszenie, udostępnianie, importowanie i instalowanie umiejętności, inne polecenia oraz edycje plików spoza OpenKnowledge nadal pytają o zgodę. W terminalu Cursor, OpenCode i Pi nie są objęte tą zmianą. W miarę możliwości, osobno dla każdego agenta."
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "Dotyczy wszystkich projektów na tym komputerze. Podaj czcionkę zainstalowaną na tym komputerze, np. Nerd Font dla ikon w znaku zachęty. Pozostaw puste, aby użyć domyślnej czcionki o stałej szerokości."
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "Dotyczy tylko tego projektu na tym komputerze. Przechowywane w .ok/local, nieudostępniane przez git."
 
@@ -3919,6 +3922,9 @@ msgstr "Duplikaty odrzucone"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "np. drafts/ lub *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "np. JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "np. server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "Nie udało się zaktualizować domyślnej synchronizacji projektu — {d
 msgid "Failed to update the sync interval — {detail}"
 msgstr "Nie udało się zaktualizować interwału synchronizacji — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "Nie udało się zaktualizować czcionki terminala — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "Nie udało się zaktualizować rozmiaru czcionki terminala — {detail}"
+
 msgid "Failed to upload file"
 msgstr "Nie udało się przesłać pliku"
 
@@ -4843,6 +4855,9 @@ msgstr "Obserwuj nas na X"
 
 msgid "Following the agent's edits"
 msgstr "Śledzenie zmian agenta"
+
+msgid "Font"
+msgstr "Czcionka"
 
 msgid "Footnote"
 msgstr "Przypis"
@@ -10409,6 +10424,15 @@ msgstr "Terminal wyłączony"
 
 msgid "Terminal failed to load"
 msgstr "Nie udało się wczytać terminala"
+
+msgid "Terminal font family"
+msgstr "Rodzina czcionki terminala"
+
+msgid "Terminal font size"
+msgstr "Rozmiar czcionki terminala"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "Rozmiar czcionki terminala musi być liczbą całkowitą od {TERMINAL_FONT_SIZE_MIN} do {TERMINAL_FONT_SIZE_MAX}"
 
 msgid "Terminal sessions"
 msgstr "Sesje terminala"

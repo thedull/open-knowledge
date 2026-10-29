@@ -337,6 +337,15 @@ vi.doMock('@/lib/agent-connections', async (importOriginal) => ({
 }));
 
 const { TerminalPanel } = await import('./TerminalPanel');
+const { ConfigContext } = await import('@/lib/config-context');
+type ConfigContextValue = import('@/lib/config-context').ConfigContextValue;
+
+function configWithTerminalFont(terminal: {
+  fontFamily?: string;
+  fontSize?: number;
+}): ConfigContextValue {
+  return { userConfig: { terminal } } as unknown as ConfigContextValue;
+}
 const { XTERM_DARK_THEME, XTERM_LIGHT_THEME } = await import('./terminal-theme');
 
 describe('TerminalPanel', () => {
@@ -363,6 +372,43 @@ describe('TerminalPanel', () => {
   afterEach(() => {
     cleanup();
     __resetPaneVisibilityStoreForTests();
+  });
+
+  test('uses the default monospace font when no terminal font is configured', () => {
+    const { bridge } = makeBridge({ ok: true, ptyId: 'pty-1' });
+    render(<TerminalPanel bridge={bridge} />);
+    expect(lastTerm?.options.fontFamily).toBe(
+      'ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+    );
+    expect(lastTerm?.options.fontSize).toBe(13);
+    expect(lastTerm?.options.rescaleOverlappingGlyphs).toBe(true);
+  });
+
+  test('applies the configured terminal font at mount and live when it changes', () => {
+    const { bridge } = makeBridge({ ok: true, ptyId: 'pty-1' });
+    const { rerender } = render(
+      <ConfigContext value={configWithTerminalFont({ fontFamily: 'Hack Nerd Font', fontSize: 16 })}>
+        <TerminalPanel bridge={bridge} />
+      </ConfigContext>,
+    );
+    const term = lastTerm;
+    expect(term?.options.fontFamily).toBe(
+      'Hack Nerd Font, ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+    );
+    expect(term?.options.fontSize).toBe(16);
+
+    rerender(
+      <ConfigContext
+        value={configWithTerminalFont({ fontFamily: 'JetBrainsMono Nerd Font Mono', fontSize: 18 })}
+      >
+        <TerminalPanel bridge={bridge} />
+      </ConfigContext>,
+    );
+    expect(lastTerm).toBe(term);
+    expect(term?.options.fontFamily).toBe(
+      'JetBrainsMono Nerd Font Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+    );
+    expect(term?.options.fontSize).toBe(18);
   });
 
   test('mounts an accessible region, configures xterm for a11y, and creates a PTY sized to the fitted terminal', async () => {

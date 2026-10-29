@@ -75,6 +75,12 @@ export const MAX_EMBEDDINGS_MAX_BATCH_CHARS = 16_384_000;
 export const MIN_EMBEDDINGS_DOC_TIMEOUT_MS = 1;
 export const MAX_EMBEDDINGS_DOC_TIMEOUT_MS = 600_000;
 
+export const TERMINAL_DEFAULT_FONT_FAMILY =
+  'ui-monospace, SFMono-Regular, Menlo, Monaco, monospace';
+export const TERMINAL_DEFAULT_FONT_SIZE = 13;
+export const TERMINAL_FONT_SIZE_MIN = 8;
+export const TERMINAL_FONT_SIZE_MAX = 32;
+
 export const DEFAULT_SERVER_BIND: readonly string[] = Object.freeze(['127.0.0.1']);
 
 export const IDLE_SHUTDOWN_DURATION_RE = /^[1-9]\d*(s|m|h)$/;
@@ -771,6 +777,30 @@ export const ConfigSchema = z.looseObject({
           defaultScope: 'project-local',
           description:
             'Absolute Windows shell executable override for the in-app terminal. PowerShell, cmd.exe, and Git Bash support OpenKnowledge-managed launches (agent chat tabs and fixed commands such as Resolve in terminal or Install Slidev) and dropped-file path insertion. A different existing executable remains usable for plain terminal tabs and shows a capability notice; requested agent and command launches open only the plain shell without running the agent or command, and dropped-file paths are refused. Empty values use automatic shell discovery. Per-machine (project-local), human-managed, and never shared via git, clone, or sync.',
+        })
+        .optional(),
+      fontFamily: z
+        .string()
+        .register(fieldRegistry, {
+          scope: 'user',
+          agentSettable: false,
+          reload: 'live',
+          defaultScope: 'user',
+          description:
+            'Font family for the in-app terminal, as a CSS font-family list such as `"JetBrainsMono Nerd Font Mono"`. Use an installed Nerd Font to render prompt icons. The built-in monospace fonts follow as a fallback. Empty or unset uses the built-in monospace fonts. A personal preference (user scope).',
+        })
+        .optional(),
+      fontSize: z
+        .number()
+        .int()
+        .min(TERMINAL_FONT_SIZE_MIN)
+        .max(TERMINAL_FONT_SIZE_MAX)
+        .register(fieldRegistry, {
+          scope: 'user',
+          agentSettable: false,
+          reload: 'live',
+          defaultScope: 'user',
+          description: `Font size for the in-app terminal, in pixels, from ${TERMINAL_FONT_SIZE_MIN} to ${TERMINAL_FONT_SIZE_MAX}. Unset uses ${TERMINAL_DEFAULT_FONT_SIZE}. A personal preference (user scope).`,
         })
         .optional(),
     })

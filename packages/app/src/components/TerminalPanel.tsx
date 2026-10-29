@@ -48,6 +48,7 @@ import { TerminalNoticeBanner } from './TerminalNoticeBanner';
 import { TerminalRefusalNotice } from './TerminalRefusalNotice';
 import { TerminalStartingNotice } from './TerminalStartingNotice';
 import { isRenderedContainer, shouldFitForResize } from './terminal-fit-gate';
+import { resolveTerminalFont } from './terminal-font';
 import { createTerminalFileLinkProvider } from './terminal-link-provider';
 import { createRecentOpenGuard, type TerminalLinkTarget } from './terminal-links';
 import { createSameFrameRepaint } from './terminal-render-flush';
@@ -147,6 +148,11 @@ function TerminalSession({
   const xtermTheme = useLiveXtermTheme(resolvedTheme);
   const termRef = useRef<Terminal | null>(null);
   const initialXtermThemeRef = useRef(xtermTheme);
+  const configCtx = use(ConfigContext);
+  const terminalFont = resolveTerminalFont(configCtx?.userConfig);
+  const { fontFamily, fontSize } = terminalFont;
+  const initialTerminalFontRef = useRef(terminalFont);
+  const refitRef = useRef<() => void>(() => undefined);
   const [status, setStatus] = useState<SessionStatus>('starting');
   const [hasOutput, setHasOutput] = useState(false);
   const [connectionCli, setConnectionCli] = useState<TerminalCli | null>(null);
@@ -168,7 +174,6 @@ function TerminalSession({
     { cli: TerminalCli; kind: 'unverified' } | { cli: TerminalCli; kind: 'not-found' } | null
   >(null);
 
-  const configCtx = use(ConfigContext);
   const autoApproveOkToolsRef = useRef(configCtx?.userConfig?.agents?.autoApproveOkTools ?? true);
   const shellFamilyRef = useRef<WindowsShellFamily | null>(null);
 
@@ -263,8 +268,9 @@ function TerminalSession({
       minimumContrastRatio: 4.5,
       allowProposedApi: true,
       cursorBlink: true,
-      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
-      fontSize: 13,
+      fontFamily: initialTerminalFontRef.current.fontFamily,
+      fontSize: initialTerminalFontRef.current.fontSize,
+      rescaleOverlappingGlyphs: true,
       scrollback: 10000,
       smoothScrollDuration: 125,
       scrollSensitivity: 3,
@@ -370,6 +376,15 @@ function TerminalSession({
     }
 
     const repaintSameFrame = createSameFrameRepaint(term);
+    refitRef.current = () => {
+      if (
+        !isRenderedContainer(container.getBoundingClientRect(), window.getComputedStyle(container))
+      )
+        return;
+      fit.fit();
+      repaintSameFrame();
+      ptyResizeThrottle?.request();
+    };
 
     const webglCanvas = container.querySelector<HTMLCanvasElement>('.xterm-screen canvas');
     if (webglCanvas !== null) {
@@ -887,6 +902,7 @@ function TerminalSession({
       ptyIdRef.current = null;
       onPtyIdRef.current?.(null);
       termRef.current = null;
+      refitRef.current = () => undefined;
       observer?.disconnect();
       canvasPixelObserver?.disconnect();
       ptyResizeThrottle?.cancel();
@@ -908,6 +924,15 @@ function TerminalSession({
     if (term === null) return;
     term.options.theme = xtermTheme;
   }, [xtermTheme]);
+
+  useEffect(() => {
+    const term = termRef.current;
+    if (term === null) return;
+    if (term.options.fontFamily === fontFamily && term.options.fontSize === fontSize) return;
+    term.options.fontFamily = fontFamily;
+    term.options.fontSize = fontSize;
+    refitRef.current();
+  }, [fontFamily, fontSize]);
 
   useEffect(() => {
     const accessibility = bridge.accessibility;

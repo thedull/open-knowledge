@@ -144,7 +144,7 @@ describe('ConfigSchema coverage (NR3 — every leaf has fieldRegistry metadata)'
     expect(allowlisted).toEqual([]);
   });
 
-  test('user-strict fields cover agents.{autoApproveOkTools,browserTools} + appearance.{colorTheme*,customTheme.*,language,preview.autoOpen,theme} + editor.{previewTabs,wordWrap} + git.hosts + slides.enabled', () => {
+  test('user-strict fields cover agents.{autoApproveOkTools,browserTools} + appearance.{colorTheme*,customTheme.*,language,preview.autoOpen,theme} + editor.{previewTabs,wordWrap} + git.hosts + slides.enabled + terminal.{fontFamily,fontSize}', () => {
     const leaves: { path: string[]; schema: unknown }[] = [];
     walkLeaves(ConfigSchema, [], leaves);
     const userStrict = leaves
@@ -187,6 +187,8 @@ describe('ConfigSchema coverage (NR3 — every leaf has fieldRegistry metadata)'
       'skills.trustedPrivateOrigins',
       'slides.enabled',
       'telemetry.skillInstallReports.enabled',
+      'terminal.fontFamily',
+      'terminal.fontSize',
     ]);
   });
 
