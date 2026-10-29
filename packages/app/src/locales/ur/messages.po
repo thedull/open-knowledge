@@ -1559,6 +1559,9 @@ msgstr "اس مشین کے تمام پروجیکٹس پر لاگو ہوتا ہے
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "اس مشین کے تمام پروجیکٹس پر لاگو ہوتا ہے۔ بلٹ اِن ٹرمینل سے شروع کیے گئے Claude اور Codex، اور ایپ کے ایجنٹ پینل چیٹ میں کوئی بھی ایجنٹ، OpenKnowledge کے پڑھنے اور لکھنے کے ٹولز خود بخود منظور کرتے ہیں (Claude \"{cliCommand} open\" بھی خود چلاتا ہے)۔ اسکلز حذف کرنا، منتقل کرنا، شیئر کرنا، درآمد یا انسٹال کرنا، دیگر کمانڈز اور غیر OpenKnowledge فائل ترامیم اب بھی پوچھتی ہیں۔ ٹرمینل میں Cursor، OpenCode اور Pi متاثر نہیں ہوتے۔ ہر ایجنٹ کے لیے حتی الامکان۔"
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "اس مشین کے تمام پروجیکٹس پر لاگو ہوتا ہے۔ اس کمپیوٹر پر انسٹال کسی فونٹ کا نام لکھیں، جیسے پرامپٹ آئیکنز کے لیے کوئی Nerd Font۔ ڈیفالٹ مونو اسپیس فونٹ استعمال کرنے کے لیے خالی چھوڑیں۔"
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "صرف اسی کمپیوٹر پر اس پروجیکٹ پر لاگو ہوتا ہے۔ ‎.ok/local میں محفوظ، git کے ذریعے مشترک نہیں۔"
 
@@ -3919,6 +3922,9 @@ msgstr "نقول ہٹا دی گئیں"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "مثلاً drafts/ یا *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "مثلاً JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "مثلاً server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "پروجیکٹ کی طے شدہ مطابقت پذیری تازہ نہی�
 msgid "Failed to update the sync interval — {detail}"
 msgstr "مطابقت پذیری کا وقفہ اپ ڈیٹ نہیں ہو سکا — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "ٹرمینل کا فونٹ اپ ڈیٹ نہیں ہو سکا — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "ٹرمینل کے فونٹ کا سائز اپ ڈیٹ نہیں ہو سکا — {detail}"
+
 msgid "Failed to upload file"
 msgstr "فائل اپ لوڈ نہیں ہو سکی"
 
@@ -4843,6 +4855,9 @@ msgstr "X پر ہمیں فالو کریں"
 
 msgid "Following the agent's edits"
 msgstr "ایجنٹ کی ترامیم کی پیروی جاری ہے"
+
+msgid "Font"
+msgstr "فونٹ"
 
 msgid "Footnote"
 msgstr "فٹ نوٹ"
@@ -10409,6 +10424,15 @@ msgstr "ٹرمینل بند"
 
 msgid "Terminal failed to load"
 msgstr "ٹرمینل لوڈ نہیں ہو سکا"
+
+msgid "Terminal font family"
+msgstr "ٹرمینل فونٹ فیملی"
+
+msgid "Terminal font size"
+msgstr "ٹرمینل فونٹ کا سائز"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "ٹرمینل فونٹ کا سائز {TERMINAL_FONT_SIZE_MIN} سے {TERMINAL_FONT_SIZE_MAX} تک کا مکمل عدد ہونا چاہیے"
 
 msgid "Terminal sessions"
 msgstr "ٹرمینل کے سیشنز"

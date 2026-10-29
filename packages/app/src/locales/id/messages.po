@@ -1555,6 +1555,9 @@ msgstr "Berlaku untuk semua proyek di mesin ini, pada obrolan Claude Code dan Co
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "Berlaku untuk semua proyek di mesin ini. Claude dan Codex yang dimulai dari terminal bawaan, serta agen apa pun dalam obrolan panel Agen di aplikasi, otomatis menyetujui alat baca dan tulis OpenKnowledge (Claude juga otomatis menjalankan \"{cliCommand} open\"). Menghapus, memindahkan, membagikan, mengimpor atau memasang skill, perintah lain, dan pengeditan berkas non-OpenKnowledge tetap bertanya. Di terminal, Cursor, OpenCode, dan Pi tidak terpengaruh. Upaya terbaik per agen."
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "Berlaku untuk semua proyek di mesin ini. Sebutkan font yang terpasang di komputer ini, misalnya Nerd Font untuk ikon prompt. Biarkan kosong untuk memakai font monospace bawaan."
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "Berlaku untuk proyek ini hanya di komputer ini. Disimpan di .ok/local, tidak dibagikan lewat git."
 
@@ -3915,6 +3918,9 @@ msgstr "Duplikat dibuang"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "mis. drafts/ atau *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "mis. JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "mis. server.ts"
 
@@ -4620,6 +4626,12 @@ msgstr "Gagal memperbarui sinkronisasi bawaan proyek — {detail}"
 msgid "Failed to update the sync interval — {detail}"
 msgstr "Gagal memperbarui interval sinkronisasi — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "Gagal memperbarui font terminal — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "Gagal memperbarui ukuran font terminal — {detail}"
+
 msgid "Failed to upload file"
 msgstr "Gagal mengunggah berkas"
 
@@ -4839,6 +4851,9 @@ msgstr "Ikuti kami di X"
 
 msgid "Following the agent's edits"
 msgstr "Mengikuti suntingan agen"
+
+msgid "Font"
+msgstr "Font"
 
 msgid "Footnote"
 msgstr "Catatan kaki"
@@ -10405,6 +10420,15 @@ msgstr "Terminal dinonaktifkan"
 
 msgid "Terminal failed to load"
 msgstr "Gagal memuat terminal"
+
+msgid "Terminal font family"
+msgstr "Keluarga font terminal"
+
+msgid "Terminal font size"
+msgstr "Ukuran font terminal"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "Ukuran font terminal harus bilangan bulat dari {TERMINAL_FONT_SIZE_MIN} sampai {TERMINAL_FONT_SIZE_MAX}"
 
 msgid "Terminal sessions"
 msgstr "Sesi terminal"

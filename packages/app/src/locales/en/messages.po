@@ -1559,6 +1559,9 @@ msgstr "Applies to all projects on this machine, in Claude Code and Codex chats 
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 
@@ -3919,6 +3922,9 @@ msgstr "Duplicates dropped"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "e.g. drafts/ or *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "e.g. JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "e.g. server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "Failed to update the project sync default — {detail}"
 msgid "Failed to update the sync interval — {detail}"
 msgstr "Failed to update the sync interval — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "Failed to update the terminal font — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "Failed to update the terminal font size — {detail}"
+
 msgid "Failed to upload file"
 msgstr "Failed to upload file"
 
@@ -4843,6 +4855,9 @@ msgstr "Follow us on X"
 
 msgid "Following the agent's edits"
 msgstr "Following the agent's edits"
+
+msgid "Font"
+msgstr "Font"
 
 msgid "Footnote"
 msgstr "Footnote"
@@ -10409,6 +10424,15 @@ msgstr "Terminal disabled"
 
 msgid "Terminal failed to load"
 msgstr "Terminal failed to load"
+
+msgid "Terminal font family"
+msgstr "Terminal font family"
+
+msgid "Terminal font size"
+msgstr "Terminal font size"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
 
 msgid "Terminal sessions"
 msgstr "Terminal sessions"

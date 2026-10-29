@@ -1559,6 +1559,9 @@ msgstr "ينطبق على كل المشاريع على هذا الجهاز، ف�
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "ينطبق على كل المشاريع على هذا الجهاز. Claude وCodex اللذان يُشغَّلان من الطرفية المدمجة، وأي وكيل في محادثة لوحة الوكلاء داخل التطبيق، يوافقون تلقائيًا على أدوات القراءة والكتابة في OpenKnowledge (ويشغّل Claude أيضًا \"{cliCommand} open\" تلقائيًا). الحذف والنقل والمشاركة واستيراد المهارات أو تثبيتها، والأوامر الأخرى، وتعديل الملفات خارج OpenKnowledge تظل تطلب الإذن. في الطرفية، لا يتأثر Cursor وOpenCode وPi. بأفضل جهد لكل وكيل."
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "ينطبق على جميع المشاريع على هذا الجهاز. اكتب اسم خط مثبّت على هذا الحاسوب، مثل خط Nerd Font لعرض أيقونات سطر الأوامر. اتركه فارغًا لاستخدام الخط أحادي المسافة الافتراضي."
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "ينطبق على هذا المشروع على هذا الكمبيوتر فقط. يُخزَّن في ‎.ok/local ولا يُشارك عبر git."
 
@@ -3919,6 +3922,9 @@ msgstr "إسقاط المكرر"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "مثال: drafts/ أو *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "مثال: JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "مثال: server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "فشل تحديث افتراضي مزامنة المشروع — {detail
 msgid "Failed to update the sync interval — {detail}"
 msgstr "تعذّر تحديث فاصل المزامنة — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "تعذّر تحديث خط الطرفية — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "تعذّر تحديث حجم خط الطرفية — {detail}"
+
 msgid "Failed to upload file"
 msgstr "فشل رفع الملف"
 
@@ -4843,6 +4855,9 @@ msgstr "تابعنا على X"
 
 msgid "Following the agent's edits"
 msgstr "يجري متابعة تعديلات الوكيل"
+
+msgid "Font"
+msgstr "الخط"
 
 msgid "Footnote"
 msgstr "حاشية"
@@ -10409,6 +10424,15 @@ msgstr "الطرفية معطّلة"
 
 msgid "Terminal failed to load"
 msgstr "فشل تحميل الطرفية"
+
+msgid "Terminal font family"
+msgstr "عائلة خط الطرفية"
+
+msgid "Terminal font size"
+msgstr "حجم خط الطرفية"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "يجب أن يكون حجم خط الطرفية عددًا صحيحًا من {TERMINAL_FONT_SIZE_MIN} إلى {TERMINAL_FONT_SIZE_MAX}"
 
 msgid "Terminal sessions"
 msgstr "جلسات الطرفية"

@@ -1559,6 +1559,9 @@ msgstr "S'applique à tous les projets de cette machine, dans les chats Claude C
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "S'applique à tous les projets de cette machine. Claude et Codex lancés depuis le terminal intégré, ainsi que tout agent dans un chat du panneau Agents de l'app, approuvent automatiquement les outils de lecture et d'écriture d'OpenKnowledge (Claude exécute aussi \"{cliCommand} open\" automatiquement). Supprimer, déplacer, partager, importer ou installer des skills, les autres commandes et les modifications de fichiers hors OpenKnowledge demandent toujours confirmation. Dans le terminal, Cursor, OpenCode et Pi ne sont pas concernés. Au mieux, selon l'agent."
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "S’applique à tous les projets sur cette machine. Indiquez une police installée sur cet ordinateur, par exemple une Nerd Font pour les icônes de l’invite. Laissez vide pour utiliser la police à chasse fixe par défaut."
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "S'applique à ce projet sur cet ordinateur uniquement. Stocké dans .ok/local, non partagé via git."
 
@@ -3919,6 +3922,9 @@ msgstr "Doublons écartés"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "par ex. drafts/ ou *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "p. ex. JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "par ex. server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "Échec de la mise à jour de la synchronisation par défaut du projet �
 msgid "Failed to update the sync interval — {detail}"
 msgstr "Échec de la mise à jour de l'intervalle de synchronisation — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "Impossible de mettre à jour la police du terminal — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "Impossible de mettre à jour la taille de police du terminal — {detail}"
+
 msgid "Failed to upload file"
 msgstr "Échec de l'envoi du fichier"
 
@@ -4843,6 +4855,9 @@ msgstr "Suivez-nous sur X"
 
 msgid "Following the agent's edits"
 msgstr "Suivi des modifications de l'agent"
+
+msgid "Font"
+msgstr "Police"
 
 msgid "Footnote"
 msgstr "Note de bas de page"
@@ -10409,6 +10424,15 @@ msgstr "Terminal désactivé"
 
 msgid "Terminal failed to load"
 msgstr "Échec du chargement du terminal"
+
+msgid "Terminal font family"
+msgstr "Famille de police du terminal"
+
+msgid "Terminal font size"
+msgstr "Taille de police du terminal"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "La taille de police du terminal doit être un nombre entier compris entre {TERMINAL_FONT_SIZE_MIN} et {TERMINAL_FONT_SIZE_MAX}"
 
 msgid "Terminal sessions"
 msgstr "Sessions de terminal"

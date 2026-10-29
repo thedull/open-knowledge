@@ -189,6 +189,8 @@ The terminal is also the editor's AI-chat surface: opening it starts your rememb
 
 On Windows, type `wsl` in any terminal tab to enter your default WSL distribution; OpenKnowledge's CLI detection and bundled `ok` command stay Windows-side, so install agent CLIs on Windows for them to appear in the launcher.
 
+To change the terminal's font, open **Settings → Terminal** and enter a font installed on your computer, plus an optional size. Prompt themes such as Starship, Oh My Posh, and Powerlevel10k need a [Nerd Font](https://www.nerdfonts.com) to show their icons; pick its Mono variant, for example `JetBrainsMono Nerd Font Mono`. The change applies to open terminals right away and is stored as [`terminal.fontFamily` and `terminal.fontSize`](/docs/reference/configuration) in your user config.
+
 Rename a tab by double-clicking it or pressing `F2`; the name you set pins over whatever title the running program reports, and clearing it falls back to that title. Reorder tabs by dragging, or move the active tab with `Cmd+Shift+←` / `Cmd+Shift+→` — untitled tabs keep a number that stays with their session as the strip is rearranged.
 
 The desktop app restores the Terminal's placement and size, tab order, active tab, and tab names after a full app restart. A full quit ends the shell processes and discards their scrollback; the restored tabs start new shells. This differs from moving, hiding, or reloading the editor window, which keeps the existing live sessions.

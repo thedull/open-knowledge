@@ -1559,6 +1559,9 @@ msgstr "适用于本机上的所有项目，作用于开启后新建的智能体
 msgid "Applies to all projects on this machine. Claude and Codex started from the built-in terminal, and any agent in an in-app Agents panel chat, auto-approve OpenKnowledge's read and write tools (Claude also auto-runs \"{cliCommand} open\"). Deleting, moving, sharing, importing or installing skills, other commands, and non-OpenKnowledge file edits still ask. In the terminal, Cursor, OpenCode, and Pi are unaffected. Best-effort per agent."
 msgstr "适用于本机上的所有项目。从内置终端启动的 Claude 和 Codex，以及应用内智能体面板对话中的任何智能体，都会自动批准 OpenKnowledge 的读写工具（Claude 还会自动运行 \"{cliCommand} open\"）。删除、移动、分享、导入或安装技能、其他命令以及非 OpenKnowledge 文件的编辑仍会询问。在终端中，Cursor、OpenCode 和 Pi 不受影响。按各智能体尽力而为。"
 
+msgid "Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font."
+msgstr "适用于此电脑上的所有项目。填写此电脑上已安装的字体，例如用于显示提示符图标的 Nerd Font。留空则使用默认等宽字体。"
+
 msgid "Applies to this project on this computer only. Stored in .ok/local, not shared via git."
 msgstr "仅在这台电脑上对本项目生效。保存在 .ok/local 中，不通过 git 共享。"
 
@@ -3919,6 +3922,9 @@ msgstr "丢弃重复项"
 msgid "e.g. drafts/ or *.draft.md"
 msgstr "例如 drafts/ 或 *.draft.md"
 
+msgid "e.g. JetBrainsMono Nerd Font Mono"
+msgstr "例如 JetBrainsMono Nerd Font Mono"
+
 msgid "e.g. server.ts"
 msgstr "例如 server.ts"
 
@@ -4624,6 +4630,12 @@ msgstr "更新项目同步默认值失败——{detail}"
 msgid "Failed to update the sync interval — {detail}"
 msgstr "更新同步间隔失败 — {detail}"
 
+msgid "Failed to update the terminal font — {detail}"
+msgstr "无法更新终端字体 — {detail}"
+
+msgid "Failed to update the terminal font size — {detail}"
+msgstr "无法更新终端字号 — {detail}"
+
 msgid "Failed to upload file"
 msgstr "上传文件失败"
 
@@ -4843,6 +4855,9 @@ msgstr "在 X 上关注我们"
 
 msgid "Following the agent's edits"
 msgstr "正在跟随智能体的编辑"
+
+msgid "Font"
+msgstr "字体"
 
 msgid "Footnote"
 msgstr "脚注"
@@ -10409,6 +10424,15 @@ msgstr "终端已禁用"
 
 msgid "Terminal failed to load"
 msgstr "终端加载失败"
+
+msgid "Terminal font family"
+msgstr "终端字体"
+
+msgid "Terminal font size"
+msgstr "终端字号"
+
+msgid "Terminal font size must be a whole number from {TERMINAL_FONT_SIZE_MIN} to {TERMINAL_FONT_SIZE_MAX}"
+msgstr "终端字号必须是 {TERMINAL_FONT_SIZE_MIN} 到 {TERMINAL_FONT_SIZE_MAX} 之间的整数"
 
 msgid "Terminal sessions"
 msgstr "终端会话"

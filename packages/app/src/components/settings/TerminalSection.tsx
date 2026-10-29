@@ -1,8 +1,14 @@
 // oxlint-disable ok/no-raw-error-toast -- pre-rule backlog: toasts here show raw error text; delete this line once the file maps each failure to written copy. See https://github.com/inkeep/open-knowledge/blob/main/lint-plugins/ok-rules/README.md#no-raw-error-toast
 import { humanFormat } from '@inkeep/open-knowledge-core/config/errors';
+import {
+  TERMINAL_DEFAULT_FONT_SIZE,
+  TERMINAL_FONT_SIZE_MAX,
+  TERMINAL_FONT_SIZE_MIN,
+} from '@inkeep/open-knowledge-core/config/schema';
 import { useLingui } from '@lingui/react/macro';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { useTerminalConsentState, useTerminalEnabledWriter } from '@/hooks/use-terminal-enabled';
 import { okCliCommandName } from '@/lib/channel-cli-copy';
@@ -19,6 +25,19 @@ export function TerminalSection() {
 
   const { userConfig, userBinding, userSynced } = useConfigContext();
   const autoApproveOn = userConfig?.agents?.autoApproveOkTools !== false;
+  const savedFontFamily = userConfig?.terminal?.fontFamily ?? '';
+  const savedFontSize = userConfig?.terminal?.fontSize;
+  const [fontFamilyDraft, setFontFamilyDraft] = useState(savedFontFamily);
+  const [fontSizeDraft, setFontSizeDraft] = useState(
+    savedFontSize === undefined ? '' : String(savedFontSize),
+  );
+  useEffect(() => {
+    setFontFamilyDraft(savedFontFamily);
+  }, [savedFontFamily]);
+  useEffect(() => {
+    setFontSizeDraft(savedFontSize === undefined ? '' : String(savedFontSize));
+  }, [savedFontSize]);
+  const fontDisabled = !userSynced || userBinding === null;
 
   const [codexNeedsInit, setCodexNeedsInit] = useState(false);
   useEffect(() => {
@@ -62,6 +81,43 @@ export function TerminalSection() {
     if (!result.ok) {
       const detail = humanFormat(result.error);
       toast.error(t`Failed to update the auto-approve setting — ${detail}`);
+    }
+  }
+
+  function commitFontFamily(): void {
+    if (userBinding === null) return;
+    const next = fontFamilyDraft.trim();
+    if (next === savedFontFamily) return;
+    const result = userBinding.patch({ terminal: { fontFamily: next === '' ? null : next } });
+    if (!result.ok) {
+      setFontFamilyDraft(savedFontFamily);
+      const detail = humanFormat(result.error);
+      toast.error(t`Failed to update the terminal font — ${detail}`);
+    }
+  }
+
+  function commitFontSize(): void {
+    if (userBinding === null) return;
+    const raw = fontSizeDraft.trim();
+    const next = raw === '' ? undefined : Number(raw);
+    if (next === savedFontSize) return;
+    const resetDraft = () =>
+      setFontSizeDraft(savedFontSize === undefined ? '' : String(savedFontSize));
+    if (
+      next !== undefined &&
+      (!Number.isInteger(next) || next < TERMINAL_FONT_SIZE_MIN || next > TERMINAL_FONT_SIZE_MAX)
+    ) {
+      resetDraft();
+      toast.error(
+        t`Terminal font size must be a whole number from ${TERMINAL_FONT_SIZE_MIN} to ${TERMINAL_FONT_SIZE_MAX}`,
+      );
+      return;
+    }
+    const result = userBinding.patch({ terminal: { fontSize: next ?? null } });
+    if (!result.ok) {
+      resetDraft();
+      const detail = humanFormat(result.error);
+      toast.error(t`Failed to update the terminal font size — ${detail}`);
     }
   }
 
@@ -133,6 +189,64 @@ export function TerminalSection() {
           aria-label={t`Let agents use OpenKnowledge without asking`}
           data-testid="settings-terminal-autoapprove-toggle"
         />
+      </div>
+
+      <div className="space-y-3 rounded-md border p-3" data-testid="settings-terminal-font">
+        <div className="space-y-0.5">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium">{t`Font`}</span>
+            <ScopeBadge scope="user" />
+          </div>
+          <p className="text-1sm text-muted-foreground">
+            {t`Applies to all projects on this machine. Name a font installed on this computer, such as a Nerd Font for prompt icons. Leave empty to use the default monospace font.`}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <label htmlFor="settings-terminal-font-family" className="sr-only">
+            {t`Terminal font family`}
+          </label>
+          <Input
+            id="settings-terminal-font-family"
+            value={fontFamilyDraft}
+            placeholder={t`e.g. JetBrainsMono Nerd Font Mono`}
+            onChange={(e) => setFontFamilyDraft(e.target.value)}
+            onBlur={commitFontFamily}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                commitFontFamily();
+              }
+            }}
+            disabled={fontDisabled}
+            spellCheck={false}
+            className="h-8 flex-1 text-sm"
+            data-testid="settings-terminal-font-family"
+          />
+          <label htmlFor="settings-terminal-font-size" className="sr-only">
+            {t`Terminal font size`}
+          </label>
+          <Input
+            id="settings-terminal-font-size"
+            type="number"
+            inputMode="numeric"
+            min={TERMINAL_FONT_SIZE_MIN}
+            max={TERMINAL_FONT_SIZE_MAX}
+            step={1}
+            value={fontSizeDraft}
+            placeholder={String(TERMINAL_DEFAULT_FONT_SIZE)}
+            onChange={(e) => setFontSizeDraft(e.target.value)}
+            onBlur={commitFontSize}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                commitFontSize();
+              }
+            }}
+            disabled={fontDisabled}
+            className="h-8 w-20 text-sm"
+            data-testid="settings-terminal-font-size"
+          />
+        </div>
       </div>
     </section>
   );
