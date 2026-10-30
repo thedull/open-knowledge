@@ -27,16 +27,9 @@ export function TerminalSection() {
   const autoApproveOn = userConfig?.agents?.autoApproveOkTools !== false;
   const savedFontFamily = userConfig?.terminal?.fontFamily ?? '';
   const savedFontSize = userConfig?.terminal?.fontSize;
-  const [fontFamilyDraft, setFontFamilyDraft] = useState(savedFontFamily);
-  const [fontSizeDraft, setFontSizeDraft] = useState(
-    savedFontSize === undefined ? '' : String(savedFontSize),
-  );
-  useEffect(() => {
-    setFontFamilyDraft(savedFontFamily);
-  }, [savedFontFamily]);
-  useEffect(() => {
-    setFontSizeDraft(savedFontSize === undefined ? '' : String(savedFontSize));
-  }, [savedFontSize]);
+  const savedFontSizeText = savedFontSize === undefined ? '' : String(savedFontSize);
+  const [fontFamilyDraft, setFontFamilyDraft] = useState<string | null>(null);
+  const [fontSizeDraft, setFontSizeDraft] = useState<string | null>(null);
   const fontDisabled = !userSynced || userBinding === null;
 
   const [codexNeedsInit, setCodexNeedsInit] = useState(false);
@@ -85,29 +78,27 @@ export function TerminalSection() {
   }
 
   function commitFontFamily(): void {
-    if (userBinding === null) return;
+    if (userBinding === null || fontFamilyDraft === null) return;
     const next = fontFamilyDraft.trim();
+    setFontFamilyDraft(null);
     if (next === savedFontFamily) return;
     const result = userBinding.patch({ terminal: { fontFamily: next === '' ? null : next } });
     if (!result.ok) {
-      setFontFamilyDraft(savedFontFamily);
       const detail = humanFormat(result.error);
       toast.error(t`Failed to update the terminal font — ${detail}`);
     }
   }
 
   function commitFontSize(): void {
-    if (userBinding === null) return;
+    if (userBinding === null || fontSizeDraft === null) return;
     const raw = fontSizeDraft.trim();
     const next = raw === '' ? undefined : Number(raw);
+    setFontSizeDraft(null);
     if (next === savedFontSize) return;
-    const resetDraft = () =>
-      setFontSizeDraft(savedFontSize === undefined ? '' : String(savedFontSize));
     if (
       next !== undefined &&
       (!Number.isInteger(next) || next < TERMINAL_FONT_SIZE_MIN || next > TERMINAL_FONT_SIZE_MAX)
     ) {
-      resetDraft();
       toast.error(
         t`Terminal font size must be a whole number from ${TERMINAL_FONT_SIZE_MIN} to ${TERMINAL_FONT_SIZE_MAX}`,
       );
@@ -115,7 +106,6 @@ export function TerminalSection() {
     }
     const result = userBinding.patch({ terminal: { fontSize: next ?? null } });
     if (!result.ok) {
-      resetDraft();
       const detail = humanFormat(result.error);
       toast.error(t`Failed to update the terminal font size — ${detail}`);
     }
@@ -207,7 +197,7 @@ export function TerminalSection() {
           </label>
           <Input
             id="settings-terminal-font-family"
-            value={fontFamilyDraft}
+            value={fontFamilyDraft ?? savedFontFamily}
             placeholder={t`e.g. JetBrainsMono Nerd Font Mono`}
             onChange={(e) => setFontFamilyDraft(e.target.value)}
             onBlur={commitFontFamily}
@@ -232,7 +222,7 @@ export function TerminalSection() {
             min={TERMINAL_FONT_SIZE_MIN}
             max={TERMINAL_FONT_SIZE_MAX}
             step={1}
-            value={fontSizeDraft}
+            value={fontSizeDraft ?? savedFontSizeText}
             placeholder={String(TERMINAL_DEFAULT_FONT_SIZE)}
             onChange={(e) => setFontSizeDraft(e.target.value)}
             onBlur={commitFontSize}
