@@ -10,7 +10,10 @@ let consentState: ConsentState = { enabled: false, synced: true };
 let writerImpl: Writer = null;
 const writerCalls: boolean[] = [];
 
-let userConfig: { agents?: { autoApproveOkTools?: boolean } } | null = {
+let userConfig: {
+  agents?: { autoApproveOkTools?: boolean };
+  terminal?: { fontFamily?: string; fontSize?: number };
+} | null = {
   agents: { autoApproveOkTools: true },
 };
 let userSynced = true;
@@ -230,7 +233,7 @@ describe("TerminalSection (codex-can't-honor note)", () => {
     await waitFor(() => expect(autoApproveSwitch()).not.toBeNull());
 
     expect(screen.getByTestId('settings-scope-badge-project-local')).not.toBeNull();
-    expect(screen.getByTestId('settings-scope-badge-user')).not.toBeNull();
+    expect(screen.getAllByTestId('settings-scope-badge-user')).toHaveLength(2);
   });
 });
 
@@ -269,5 +272,52 @@ describe('TerminalSection names the running channel CLI', () => {
     expect(codexNote()?.textContent).toBe(
       'Codex will still ask until you run "ok-beta init" in a terminal for this project.',
     );
+  });
+});
+
+describe('TerminalSection (terminal font)', () => {
+  beforeEach(() => {
+    consentState = { enabled: true, synced: true };
+    userConfig = {};
+    userSynced = true;
+    userBinding = {
+      patch: (p) => {
+        userPatchCalls.push(p);
+        return { ok: true };
+      },
+    };
+    userPatchCalls.length = 0;
+  });
+  afterEach(() => cleanup());
+
+  test('committing a font family on Enter patches the user config', async () => {
+    render(<TerminalSection />);
+    const input = screen.getByTestId('settings-terminal-font-family');
+    await userEvent.type(input, 'JetBrainsMono Nerd Font Mono{Enter}');
+    expect(userPatchCalls).toEqual([{ terminal: { fontFamily: 'JetBrainsMono Nerd Font Mono' } }]);
+  });
+
+  test('clearing the font family removes the key', async () => {
+    userConfig = { terminal: { fontFamily: 'Hack Nerd Font' } };
+    render(<TerminalSection />);
+    const input = screen.getByTestId('settings-terminal-font-family');
+    await userEvent.clear(input);
+    await userEvent.tab();
+    expect(userPatchCalls).toEqual([{ terminal: { fontFamily: null } }]);
+  });
+
+  test('committing a font size in range patches the user config', async () => {
+    render(<TerminalSection />);
+    const input = screen.getByTestId('settings-terminal-font-size');
+    await userEvent.type(input, '15{Enter}');
+    expect(userPatchCalls).toEqual([{ terminal: { fontSize: 15 } }]);
+  });
+
+  test('an out-of-range font size is not written', async () => {
+    render(<TerminalSection />);
+    const input = screen.getByTestId('settings-terminal-font-size') as HTMLInputElement;
+    await userEvent.type(input, '99{Enter}');
+    expect(userPatchCalls).toEqual([]);
+    expect(input.value).toBe('');
   });
 });
